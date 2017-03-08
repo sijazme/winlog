@@ -84,6 +84,22 @@
             }
         }
 
+
+        delegate void ToggleCallback();
+        public void Toggle()
+        {
+            if (this.InvokeRequired)
+            {
+                ToggleCallback d = new ToggleCallback(Toggle);
+                this.Invoke(d, new object[] { });
+            }
+            else
+            {
+
+                this.Visible = !this.Visible;
+            }
+        }
+
         #endregion
 
         private System.Windows.Forms.RichTextBox ConsoleBox;
