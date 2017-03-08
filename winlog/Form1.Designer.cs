@@ -37,12 +37,12 @@
             this.ConsoleBox.BackColor = System.Drawing.Color.Black;
             this.ConsoleBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ConsoleBox.ForeColor = System.Drawing.Color.White;
-            this.ConsoleBox.Location = new System.Drawing.Point(7, 8);
+            this.ConsoleBox.Location = new System.Drawing.Point(10, 8);
             this.ConsoleBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.ConsoleBox.Name = "ConsoleBox";
             this.ConsoleBox.ReadOnly = true;
             this.ConsoleBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.ConsoleBox.Size = new System.Drawing.Size(752, 395);
+            this.ConsoleBox.Size = new System.Drawing.Size(760, 395);
             this.ConsoleBox.TabIndex = 0;
             this.ConsoleBox.Text = "";
             // 
@@ -50,7 +50,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(769, 414);
+            this.ClientSize = new System.Drawing.Size(778, 414);
             this.Controls.Add(this.ConsoleBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);

@@ -17,3 +17,4 @@ C:\Users\ahsen\Documents\MEGA\software\C#\winlog\winlog\obj\Debug\winlog.csproj.
 C:\Users\ahsen\Desktop\winlog\winlog\bin\Debug\winlog.exe.config
 C:\Users\ahsen\Desktop\winlog\winlog\obj\Debug\winlog.exe
 C:\Users\ahsen\Desktop\winlog\winlog\obj\Debug\winlog.pdb
+C:\Users\ahsen\Documents\MEGA\software\C#\winlog\winlog\obj\Debug\winlog.csprojResolveAssemblyReference.cache

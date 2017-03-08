@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Mail;
+using System.Configuration;
 
 namespace winlog
 {
@@ -30,13 +31,25 @@ UseDefaultCredentials = {5}";
                 smtpClient.UseDefaultCredentials.ToString());
 
         }
-        public void SendLog(string content)
+        public string SendLog(string content)
         {
             var smtp = new SmtpClient();
+            
 
-            var fromAddress = new MailAddress("robotmr348@gmail.com", "netlogger");
-            var toAddress = new MailAddress("sijazme@gmail.com", "sijazme");
-            string subject = string.Format("log {0} {1} UTC", DateTime.UtcNow.ToShortDateString(), DateTime.UtcNow.ToShortTimeString());
+            var fromAddress = 
+                new MailAddress(
+                    ConfigurationManager.AppSettings["fromAddress"], 
+                    ConfigurationManager.AppSettings["fromName"]);
+
+            var toAddress = 
+                new MailAddress(
+                    ConfigurationManager.AppSettings["toAddress"],
+                    ConfigurationManager.AppSettings["toName"]);
+
+            string subject = string.Format("log {0} {1} UTC", 
+                            DateTime.UtcNow.ToShortDateString(), 
+                            DateTime.UtcNow.ToShortTimeString());
+
             string body = content;
 
             using (var message = new MailMessage(fromAddress, toAddress)
@@ -51,9 +64,11 @@ UseDefaultCredentials = {5}";
                 }
                 catch (Exception ex)
                 {
-                    System.Console.WriteLine(ex.Message);
+                    return ex.Message;
                 }
             }
-        }
+
+            return "SUCCESS";
+        }        
     }
 }

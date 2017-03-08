@@ -19,6 +19,17 @@ namespace winlog
         private void Form1_Load1(object sender, EventArgs e)
         {
             Keylogger();
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+
+            this.MaximumSize = new System.Drawing.Size(800, 470);
+            this.MinimumSize = new System.Drawing.Size(800, 470);            
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+
+            this.ConsoleBox.MinimumSize = new System.Drawing.Size(760, 395);
+            this.ConsoleBox.MinimumSize = new System.Drawing.Size(760, 395);
         }
         
         public void Keylogger()
