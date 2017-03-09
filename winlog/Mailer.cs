@@ -31,6 +31,45 @@ UseDefaultCredentials = {5}";
                 smtpClient.UseDefaultCredentials.ToString());
 
         }
+
+
+        public string SendConfirmation()
+        {
+            var smtp = new SmtpClient();
+
+            var fromAddress =
+                new MailAddress(
+                    ConfigurationManager.AppSettings["fromAddress"],
+                    ConfigurationManager.AppSettings["fromName"]);
+
+            var toAddress =
+                new MailAddress(
+                    ConfigurationManager.AppSettings["toAddress"],
+                    ConfigurationManager.AppSettings["toName"]);
+
+            string subject = string.Format("{0}",Environment.MachineName);
+
+            string body =   string.Format("--------  INIT LOG  --------\r\n\r\n{0}\r\n{1}\r\n{2}\r\n{3} {4}",
+                            Environment.MachineName,
+                            Environment.OSVersion,
+                            Environment.UserName,
+                            DateTime.UtcNow.ToShortDateString(),
+                            DateTime.UtcNow.ToShortTimeString());
+
+            var message = new MailMessage(fromAddress, toAddress) { Subject = subject, Body = body };
+
+            try
+            {
+                smtp.Send(message);
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+
+            return "SUCCESS";
+        }
+
         public string SendLog(string content)
         {
             var smtp = new SmtpClient();
@@ -52,12 +91,10 @@ UseDefaultCredentials = {5}";
 
             string body = content;
 
-            using (var message = new MailMessage(fromAddress, toAddress)
-            {
-                Subject = subject,
-                Body = body
-            })
-            {
+            var message = new MailMessage(fromAddress, toAddress) {  Subject = subject, Body = body };
+            message.Attachments.Add(Attachment.CreateAttachmentFromString(body, "text/csv"));
+            message.Attachments[0].ContentDisposition.FileName = ConfigurationManager.AppSettings["logfile"];
+            
                 try
                 {
                     smtp.Send(message);
@@ -65,10 +102,9 @@ UseDefaultCredentials = {5}";
                 catch (Exception ex)
                 {
                     return ex.Message;
-                }
-            }
+                }            
 
             return "SUCCESS";
-        }        
+        }
     }
 }

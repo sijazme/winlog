@@ -21,4 +21,3 @@ C:\Users\ahsen\Documents\MEGA\software\C#\winlog\winlog\obj\Debug\winlog.exe.man
 C:\Users\ahsen\Documents\MEGA\software\C#\winlog\winlog\obj\Debug\winlog.application
 C:\Users\ahsen\Documents\MEGA\software\C#\winlog\winlog\obj\Debug\winlog.exe
 C:\Users\ahsen\Documents\MEGA\software\C#\winlog\winlog\obj\Debug\winlog.pdb
-C:\Users\ahsen\Documents\MEGA\software\C#\winlog\winlog\obj\Debug\winlog.csprojResolveAssemblyReference.cache

